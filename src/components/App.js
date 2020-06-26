@@ -4,25 +4,26 @@ import ItemFormContainer from './ItemFormContainer';
 import ItemList from "./ItemList"
 
 const App = (props) => {
-  const [items, setItems] = useState(["mic", "peptobismol"])
+  const [items, setItems] = useState([])
 
-  const addItem = (nameFieldState) => {
-    const newItemStateArray = items.concat(nameFieldState)
-    const newItemStateArray = [...items, nameFieldState]
 
-    setItems(newItemStateArray)
+  const addItem = (fieldState) => {
+    const newItemArray = items.concat(fieldState)
+
+    setItems(newItemArray)
   }
+
 
   return (
     <div>
       <div>
         <h1>Let's uh....track some items?</h1>
-        <ItemFormContainer
-          addItem={addItem}
-        />
         <ItemList
           items={items}
-          fakeProp="fakkkeee"
+        />
+
+        <ItemFormContainer 
+          addItem={addItem}
         />
       </div>
     </div>

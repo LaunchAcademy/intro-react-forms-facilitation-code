@@ -1,15 +1,14 @@
 import React, { useState } from "react"
+import ItemTile from "./ItemTile"
 
-const ItemList = ({ items, fakeProp }) => {
-  const { items, fakeProp } = props
-  // const items = props.items
+const ItemList = (props) => {
 
-  const listItems = items.map((item) => {
+  const listItems = props.items.map((itemObject) => {
     return(
-    <li key={item}>
-      {item}
-    </li>)
-  })
+      <ItemTile
+        itemObject={itemObject}
+      />
+  )})
 
   return (
     <ul>
