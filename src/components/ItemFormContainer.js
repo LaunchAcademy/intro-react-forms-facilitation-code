@@ -4,15 +4,16 @@ const ItemFormContainer = (props) => {
   const [itemName, setItemName] = useState("")
   const [itemDescription, setItemDescription] = useState("")
 
-  const handleClearForm = (event) => {
-    event.preventDefault()
+  const handleClearForm = () => {
     setItemName("")
+    setItemDescription("")
   }
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
 
     props.addItem({itemName: itemName, itemDescription: itemDescription})
+    handleClearForm()
   }
 
   const listenToNameChange = (event) => {
@@ -22,7 +23,6 @@ const ItemFormContainer = (props) => {
   const listenToDescriptionChange = (event) => {
     setItemDescription(event.currentTarget.value)
   }
-
 
   return (
     <div>
@@ -51,9 +51,6 @@ const ItemFormContainer = (props) => {
       </form>
 
       <button onClick={handleClearForm}> Clear Form Button </button>
-
-      <p>{itemName}</p>
-      <p>{itemDescription}</p>
     </div>
   )
 }

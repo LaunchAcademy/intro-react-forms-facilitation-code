@@ -1,15 +1,23 @@
-let WriteFilePlugin = require('write-file-webpack-plugin');
+var webpack = require('webpack');
 
-var config = {
+module.exports = {
   entry: {
-    path: './src/main.js',
+    path: './src/main.js'
   },
   output: {
-    path: __dirname + '/public',
+    path: __dirname+'/build',
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ]
+      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -18,17 +26,8 @@ var config = {
     ]
   },
   devtool: 'eval-source-map',
-  plugins: [
-    new WriteFilePlugin()
-  ]
+  devServer: {
+    contentBase: './build',
+    inline: true
+  }
 }
-
-if (process.env.NODE_ENV === 'production') {
-  delete config.devtool;
-  var webpack = require('webpack');
-  config.plugins = [
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' })
-  ];
-}
-
-module.exports = config;
