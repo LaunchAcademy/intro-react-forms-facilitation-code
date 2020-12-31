@@ -4,7 +4,7 @@ import ItemFormContainer from './ItemFormContainer';
 import ItemList from "./ItemList"
 
 const App = (props) => {
-  const [items, setItems] = useState([{name: "popcorn", description: "makes greasy hands"}, {name: "Chocolate", description: "Don't leave it in the sun"}, {name: "Coffee", description: "Essential life fuel"} ])
+  const [items, setItems] = useState([{itemName: "popcorn", description: "makes greasy hands"}, {itemName: "Chocolate", description: "Don't leave it in the sun"}, {itemName: "Coffee", description: "Essential life fuel"} ])
 
   const addItem = (fieldState) => {
     const newItemArray = items.concat(fieldState)

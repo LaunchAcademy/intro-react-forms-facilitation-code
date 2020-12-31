@@ -6,13 +6,14 @@ const ItemList = (props) => {
   const listItems = props.items.map((itemObject) => {
     return(
       <ItemTile
+        key={itemObject.itemName}
         itemObject={itemObject}
       />
   )})
 
   return (
     <ul>
-      Items
+      <h3>Items</h3>
       {listItems}
     </ul>
   )

@@ -27,21 +27,21 @@ const ItemFormContainer = (props) => {
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        <label htmlFor="name">Name:
+        <label htmlFor="itemName">Name:
           <input
             type="text"
-            id="name"
-            name="name"
+            id="itemName"
+            name="itemName"
             onChange={listenToNameChange}
             value={itemName}
           />
         </label>
 
-        <label htmlFor="name">Description:
+        <label htmlFor="itemDescription">Description:
           <input
             type="text"
-            id="description"
-            name="description"
+            id="itemDescription"
+            name="itemDescription"
             onChange={listenToDescriptionChange}
             value={itemDescription}
           />
