@@ -1,58 +1,85 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import ErrorList from "./ErrorList";
+import _ from "lodash";
 
 const ItemFormContainer = (props) => {
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  const [itemObject, setItemObject] = useState({
+    name: "",
+    description: "",
+  });
 
-  const handleClearForm = () => {
-    setItemName("")
-    setItemDescription("")
-  }
+  const [errors, setErrors] = useState({});
+
+  const handleFieldChange = (event) => {
+    setItemObject({
+      ...itemObject,
+      [event.currentTarget.name]: event.currentTarget.value,
+    });
+  };
+
+  const clearForm = (event) => {
+    setItemObject({ name: "", description: "" });
+  };
 
   const handleFormSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    props.addItem({itemName: itemName, itemDescription: itemDescription})
-    handleClearForm()
-  }
+    if (validForSubmission()) {
+      props.addItem(itemObject);
+      clearForm();
+    }
+  };
 
-  const listenToNameChange = (event) => {
-    setItemName(event.currentTarget.value)
-  }
+  const validForSubmission = () => {
+    let submitErrors = {};
+    const requiredFields = ["name", "description"];
+    requiredFields.forEach((field) => {
+      if (itemObject[field].trim() === "") {
+        submitErrors = {
+          ...submitErrors,
+          [field]: "is blank",
+        };
+      }
+    });
 
-  const listenToDescriptionChange = (event) => {
-    setItemDescription(event.currentTarget.value)
-  }
+    setErrors(submitErrors);
+    return _.isEmpty(submitErrors);
+  };
 
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        <label htmlFor="itemName">Name:
+        <ErrorList errors={errors} />
+        <label htmlFor="name">
+          Name:
           <input
             type="text"
-            id="itemName"
-            name="itemName"
-            onChange={listenToNameChange}
-            value={itemName}
+            id="name"
+            name="name"
+            onChange={handleFieldChange}
+            value={itemObject.name}
           />
         </label>
 
-        <label htmlFor="itemDescription">Description:
+        <label htmlFor="description">
+          Description:
           <input
             type="text"
-            id="itemDescription"
-            name="itemDescription"
-            onChange={listenToDescriptionChange}
-            value={itemDescription}
+            id="description"
+            name="description"
+            onChange={handleFieldChange}
+            value={itemObject.description}
           />
         </label>
 
         <input type="submit" value="Submit Item" />
       </form>
 
-      <button onClick={handleClearForm}> Clear Form Button </button>
+      <button className="button" onClick={clearForm}>
+        Clear Form
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default ItemFormContainer
+export default ItemFormContainer;

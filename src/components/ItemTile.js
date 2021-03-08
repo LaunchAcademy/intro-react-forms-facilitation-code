@@ -1,11 +1,11 @@
-import React from "react"
+import React from "react";
 
 const ItemTile = (props) => {
   return (
     <li>
-      {props.itemObject.itemName} : {props.itemObject.description}
+      {props.itemObject.name} : {props.itemObject.description}
     </li>
-  )
-}
+  );
+};
 
-export default ItemTile
+export default ItemTile;
