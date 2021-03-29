@@ -5,16 +5,27 @@ import ItemList from "./ItemList"
 
 const App = (props) => {
   const [items, setItems] = useState([
-    {itemName: "popcorn", itemDescription: "makes greasy hands"}, 
-    {itemName: "Chocolate", itemDescription: "Don't leave it in the sun"}, 
-    {itemName: "Coffee", itemDescription: "Essential life fuel"},
+    {name: "popcorn", description: "makes greasy hands"}, 
+    {name: "Chocolate", description: "Don't leave it in the sun"}, 
+    {name: "Coffee", description: "Essential life fuel"},
   ])
 
 
   const addItem = (fieldState) => {
-    const newItemArray = items.concat(fieldState)
+    // debugger
 
-    setItems(newItemArray)
+    // // Version 1
+    // const newItemArray = items.concat(fieldState)
+    // debugger
+    // // can see difference between `items` and `newItemArray`
+    // setItems(newItemArray)
+
+
+    // // Version 2 (preferred)
+    setItems([
+      ...items,
+      fieldState
+    ])
   }
 
   return (
