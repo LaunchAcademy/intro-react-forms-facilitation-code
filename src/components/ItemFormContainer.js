@@ -1,40 +1,42 @@
 import React, { useState } from "react"
 
 const ItemFormContainer = (props) => {
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  const [itemName, setItemName] = useState("i have hijacked the name field")
+  const [itemDescription, setItemDescription] = useState("ooooohhh look at me")
 
-  const handleClearForm = () => {
+  const formSubmitCallback = (event) => {
+    event.preventDefault()
+
+    const itemFields = {  
+      itemName: itemName, 
+      itemDescription: itemDescription
+    }
+
+    props.addItem(itemFields)
+
     setItemName("")
     setItemDescription("")
   }
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault()
-
-    props.addItem({itemName: itemName, itemDescription: itemDescription})
-    handleClearForm()
-  }
-
-  const listenToNameChange = (event) => {
+  const handleNameChange = (event) => {
     setItemName(event.currentTarget.value)
   }
-
-  const listenToDescriptionChange = (event) => {
+  
+  const handleDescriptionChange = (event) => {
     setItemDescription(event.currentTarget.value)
   }
 
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={formSubmitCallback}>
         <label htmlFor="itemName">Name:
           <input
             type="text"
             id="itemName"
             name="itemName"
-            onChange={listenToNameChange}
+            onChange={handleNameChange}
             value={itemName}
-          />
+            />
         </label>
 
         <label htmlFor="itemDescription">Description:
@@ -42,15 +44,13 @@ const ItemFormContainer = (props) => {
             type="text"
             id="itemDescription"
             name="itemDescription"
-            onChange={listenToDescriptionChange}
+            onChange={handleDescriptionChange}
             value={itemDescription}
           />
         </label>
 
         <input type="submit" value="Submit Item" />
       </form>
-
-      <button onClick={handleClearForm}> Clear Form Button </button>
     </div>
   )
 }
