@@ -11,12 +11,14 @@ const ItemFormContainer = (props) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
-
-    props.addItem({itemName: itemName, itemDescription: itemDescription})
+    // debugger
+    props.addItem({itemName: itemName, description: itemDescription})
     handleClearForm()
   }
 
   const listenToNameChange = (event) => {
+    // debugger
+    // console.log(event.currentTarget.value)
     setItemName(event.currentTarget.value)
   }
 
