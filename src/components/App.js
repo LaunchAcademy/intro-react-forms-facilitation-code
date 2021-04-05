@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react"
 
-import ItemFormContainer from './ItemFormContainer';
+import ItemFormContainer from "./ItemFormContainer"
 import ItemList from "./ItemList"
 
 const App = (props) => {
   const [items, setItems] = useState([
-    {itemName: "popcorn", description: "makes greasy hands"}, 
-    {itemName: "Chocolate", description: "Don't leave it in the sun"}, 
-    {itemName: "Coffee", description: "Essential life fuel"} 
+    { itemName: "popcorn", description: "makes greasy hands" },
+    { itemName: "Chocolate", description: "Don't leave it in the sun" },
+    { itemName: "Coffee", description: "Essential life fuel" }
   ])
 
   const addItem = (fieldState) => {
     // debugger
-    const newItemArray = items.concat(fieldState)
-   
+    // const newItemArray = items.concat(fieldState)
+    const newItemArray = [...items, fieldState]
     // debugger
     setItems(newItemArray)
   }
@@ -22,16 +22,12 @@ const App = (props) => {
     <div>
       <div>
         <h1>Let's uh....track some items?</h1>
-        <ItemList
-          items={items}
-        />
+        <ItemList items={items} />
 
-        <ItemFormContainer 
-          addItem={addItem}
-        />
+        <ItemFormContainer addItem={addItem} />
       </div>
     </div>
   )
 }
 
-export default App;
+export default App
