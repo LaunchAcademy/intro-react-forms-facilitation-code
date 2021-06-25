@@ -11,7 +11,12 @@ const App = (props) => {
   ])
 
 
-  const addItem = (fieldState) => {
+  const addItem = (itemFormFieldsState) => {
+
+    const newItemArray = items.concat(itemFormFieldsState)
+    // const newItemArray = [...items, itemFormFieldsState]
+
+    setItems(newItemArray)
     // adds item to state
     // is passed down to the form
   }
