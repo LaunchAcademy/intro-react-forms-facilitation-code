@@ -19,10 +19,20 @@ const ItemFormContainer = (props) => {
     })
   }
 
-  const handleFormSubmit = (event) => {
+  const handleSubmissionItem = (event) => {
+    // debugger
     event.preventDefault()
 
+    // let fieldState = { 
+    //   itemName: itemName,
+    //   itemDescription: itemDescription
+    // }
+
+    // props.addItem(fieldState)
+    // pass what is in itemName and itemDescription up to App.js
+
     // props.addItem({itemName: itemName, itemDescription: itemDescription})
+
     props.addItem(newItem)
     handleClearForm()
   }
@@ -46,7 +56,7 @@ const ItemFormContainer = (props) => {
 
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleSubmissionItem}>
         <label htmlFor="itemName">Name:
           <input
             type="text"
