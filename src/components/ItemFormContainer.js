@@ -1,27 +1,47 @@
 import React, { useState } from "react"
 
 const ItemFormContainer = (props) => {
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  // const [itemName, setItemName] = useState("")
+  // const [itemDescription, setItemDescription] = useState("")
+  const [newItem, setNewItem] = useState({
+    name: "",
+    description: ""
+  })
 
   const handleClearForm = () => {
-    setItemName("")
-    setItemDescription("")
+    // event.preventDefault()
+    // setItemName("")
+    // setItemDescription("")
+
+    setNewItem({ 
+      name: "",
+      description: ""
+    })
   }
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
 
-    props.addItem({itemName: itemName, itemDescription: itemDescription})
+    // props.addItem({itemName: itemName, itemDescription: itemDescription})
+    props.addItem(newItem)
     handleClearForm()
   }
 
-  const listenToNameChange = (event) => {
-    setItemName(event.currentTarget.value)
-  }
+  // const listenToNameChange = (event) => {
+  //   setItemName(event.currentTarget.value)
+  // }
 
-  const listenToDescriptionChange = (event) => {
-    setItemDescription(event.currentTarget.value)
+  // const listenToDescriptionChange = (event) => {
+  //   setItemDescription(event.currentTarget.value)
+  // }
+
+  const handleChange = (event) => {
+    // debugger
+    // console.log(event.currentTarget.value)
+    setNewItem({
+      ...newItem,
+      [event.currentTarget.name]: event.currentTarget.value
+    })
   }
 
   return (
@@ -31,9 +51,9 @@ const ItemFormContainer = (props) => {
           <input
             type="text"
             id="itemName"
-            name="itemName"
-            onChange={listenToNameChange}
-            value={itemName}
+            name="name"
+            onChange={handleChange}
+            value={newItem.name}
           />
         </label>
 
@@ -41,16 +61,21 @@ const ItemFormContainer = (props) => {
           <input
             type="text"
             id="itemDescription"
-            name="itemDescription"
-            onChange={listenToDescriptionChange}
-            value={itemDescription}
+            name="description"
+            onChange={handleChange}
+            value={newItem.description}
           />
         </label>
 
-        <input type="submit" value="Submit Item" />
-      </form>
+      <div className="button-group">
+        <input type="submit" className="button" value="Submit Item" />
+        <button className="button" type="button" onClick={handleClearForm}> Clear Form Button </button>
+      </div>
 
-      <button onClick={handleClearForm}> Clear Form Button </button>
+      </form>
+      
+      {/* <button className="button" onClick={handleClearForm}> Clear Form Button </button> */}
+
     </div>
   )
 }
