@@ -1,49 +1,62 @@
 import React, { useState } from "react"
 
 const ItemFormContainer = (props) => {
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
-
+  // const [itemName, setItemName] = useState("")
+  // const [description, setdescription] = useState("")
+  const [formData, setFormData] = useState({
+    name: "",
+    description: ""
+  })
   const handleClearForm = () => {
-    setItemName("")
-    setItemDescription("")
+    setFormData({
+      name: "",
+      description: ""
+    })
+    // setItemName("")
+    // setdescription("")
   }
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
 
-    props.addItem({itemName: itemName, itemDescription: itemDescription})
+    // props.addItem({itemName: itemName, description: description})
+    props.addItem(formData)
     handleClearForm()
   }
 
-  const listenToNameChange = (event) => {
-    setItemName(event.currentTarget.value)
-  }
+  // const listenToNameChange = (event) => {
+  //   setItemName(event.currentTarget.value)
+  // }
 
-  const listenToDescriptionChange = (event) => {
-    setItemDescription(event.currentTarget.value)
+  // const listenToDescriptionChange = (event) => {
+  //   setdescription(event.currentTarget.value)
+  // }
+
+  const handleChange = (event) => {
+    setFormData({...formData, [event.currentTarget.name]: event.currentTarget.value})
   }
 
   return (
-    <div>
+    <div className="callout secondary">
       <form onSubmit={handleFormSubmit}>
-        <label htmlFor="itemName">Name:
+        <label htmlFor="name">Name:
           <input
+          // required
             type="text"
-            id="itemName"
-            name="itemName"
-            onChange={listenToNameChange}
-            value={itemName}
+            id="name"
+            name="name"
+            onChange={handleChange}
+            value={formData.name}
           />
         </label>
 
-        <label htmlFor="itemDescription">Description:
+        <label htmlFor="description">Description:
           <input
             type="text"
-            id="itemDescription"
-            name="itemDescription"
-            onChange={listenToDescriptionChange}
-            value={itemDescription}
+            id="description"
+            name="description"
+            onChange={handleChange}
+            value={formData.description}
           />
         </label>
 
