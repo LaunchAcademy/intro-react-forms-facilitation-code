@@ -6,10 +6,13 @@ import ItemList from "./ItemList"
 const App = (props) => {
   const [items, setItems] = useState([{itemName: "popcorn", description: "makes greasy hands"}, {itemName: "Chocolate", description: "Don't leave it in the sun"}, {itemName: "Coffee", description: "Essential life fuel"} ])
 
-  const addItem = (fieldState) => {
-    const newItemArray = items.concat(fieldState)
-
+  const addItem = (formState) => {
+    debugger
+    
+    const newItemArray = items.concat(formState)
     setItems(newItemArray)
+
+    // setItems([...items, formState])
   }
 
   return (

@@ -1,57 +1,50 @@
 import React, { useState } from "react"
 
 const ItemFormContainer = (props) => {
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  const [name, setName] = useState("")
+  const [description, setDescription] = useState("")
 
-  const handleClearForm = () => {
-    setItemName("")
-    setItemDescription("")
+  const handleNameChange = (event) => {
+    console.log(event.currentTarget.value);
+    setName(event.currentTarget.value)
   }
 
-  const handleFormSubmit = (event) => {
+  const handleDescriptionChange = (event) => {
+    setDescription(event.currentTarget.value)
+  }
+
+  const handleSubmit = (event) => {
     event.preventDefault()
-
-    props.addItem({itemName: itemName, itemDescription: itemDescription})
-    handleClearForm()
-  }
-
-  const listenToNameChange = (event) => {
-    setItemName(event.currentTarget.value)
-  }
-
-  const listenToDescriptionChange = (event) => {
-    setItemDescription(event.currentTarget.value)
+    debugger
+    const formItem = {
+      itemName: name,
+      description: description
+    }
+    props.addItem(formItem)
   }
 
   return (
-    <div>
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="itemName">Name:
-          <input
-            type="text"
-            id="itemName"
-            name="itemName"
-            onChange={listenToNameChange}
-            value={itemName}
-          />
-        </label>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={name}
+        onChange={handleNameChange}
+      />
 
-        <label htmlFor="itemDescription">Description:
-          <input
-            type="text"
-            id="itemDescription"
-            name="itemDescription"
-            onChange={listenToDescriptionChange}
-            value={itemDescription}
-          />
-        </label>
+      <label htmlFor="description">Description:</label>
+      <input
+        type="text"
+        id="description"
+        name="description"
+        value={description}
+        onChange={handleDescriptionChange}
+      />
 
-        <input type="submit" value="Submit Item" />
-      </form>
-
-      <button onClick={handleClearForm}> Clear Form Button </button>
-    </div>
+      <input type="submit" />
+    </form>
   )
 }
 
