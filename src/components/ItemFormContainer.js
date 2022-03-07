@@ -12,7 +12,7 @@ const ItemFormContainer = (props) => {
   const handleFormSubmit = (event) => {
     event.preventDefault()
 
-    props.addItem({itemName: itemName, itemDescription: itemDescription})
+    props.addItem({ name: itemName, description: itemDescription })
     handleClearForm()
   }
 
@@ -27,7 +27,8 @@ const ItemFormContainer = (props) => {
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        <label htmlFor="itemName">Name:
+        <label htmlFor="itemName">
+          Name:
           <input
             type="text"
             id="itemName"
@@ -37,7 +38,8 @@ const ItemFormContainer = (props) => {
           />
         </label>
 
-        <label htmlFor="itemDescription">Description:
+        <label htmlFor="itemDescription">
+          Description:
           <input
             type="text"
             id="itemDescription"
