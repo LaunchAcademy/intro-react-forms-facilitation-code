@@ -2,58 +2,61 @@ import React, { useState } from "react"
 import _ from "lodash"
 
 const ItemFormContainer = (props) => {
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  // debugger
+  const [itemObject, setItemObject] = useState({ name: "", description: "" })
+  const [errors, setErrors] = useState({})
 
-  const handleClearForm = () => {
-    setItemName("")
-    setItemDescription("")
+  const handleClearForm = (event) => {
+    // event.preventDefault()
+    setItemObject({ name: "", description: "" })
   }
 
   const handleFormSubmit = (event) => {
+    // debugger
     event.preventDefault()
-
-    props.addItem({ name: itemName, description: itemDescription })
+    props.addItem(itemObject)
     handleClearForm()
   }
 
-  const listenToNameChange = (event) => {
-    setItemName(event.currentTarget.value)
-  }
-
-  const listenToDescriptionChange = (event) => {
-    setItemDescription(event.currentTarget.value)
+  const handleFormChange = (event) => {
+    // debugger
+    setItemObject({
+      ...itemObject,
+      [event.currentTarget.name]: event.currentTarget.value
+    })
   }
 
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        <label htmlFor="itemName">
+        <label htmlFor="name">
           Name:
           <input
             type="text"
-            id="itemName"
-            name="itemName"
-            onChange={listenToNameChange}
-            value={itemName}
+            id="name"
+            name="name"
+            onChange={handleFormChange}
+            value={itemObject.name}
           />
         </label>
 
-        <label htmlFor="itemDescription">
+        <label htmlFor="description">
           Description:
           <input
             type="text"
-            id="itemDescription"
-            name="itemDescription"
-            onChange={listenToDescriptionChange}
-            value={itemDescription}
+            id="description"
+            name="description"
+            onChange={handleFormChange}
+            value={itemObject.description}
           />
         </label>
 
         <input type="submit" value="Submit Item" />
+        <button type="button" onClick={handleClearForm}>
+          {" "}
+          Clear Form Button{" "}
+        </button>
       </form>
-
-      <button onClick={handleClearForm}> Clear Form Button </button>
     </div>
   )
 }

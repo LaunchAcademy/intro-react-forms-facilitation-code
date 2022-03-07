@@ -2,14 +2,11 @@ import React, { useState } from "react"
 import ItemTile from "./ItemTile"
 
 const ItemList = (props) => {
+  // debugger
 
   const listItems = props.items.map((itemObject) => {
-    return(
-      <ItemTile
-        key={itemObject.name}
-        itemObject={itemObject}
-      />
-  )})
+    return <ItemTile key={itemObject.name} itemObject={itemObject} />
+  })
 
   return (
     <ul>
