@@ -10,10 +10,9 @@ const App = (props) => {
     { name: "Coffee", description: "Essential life fuel" }
   ])
 
-  const addItem = (fieldState) => {
-    const newItemArray = items.concat(fieldState)
-
-    setItems(newItemArray)
+  const addItem = (formData) => {
+    const newItemsArray = items.concat(formData)
+    setItems(newItemsArray)
   }
 
   return (
