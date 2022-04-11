@@ -2,26 +2,44 @@ import React, { useState } from "react"
 
 const ItemFormContainer = (props) => {
   // debugger
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  // const [itemName, setItemName] = useState("")
+  // const [itemDescription, setItemDescription] = useState("")
 
-  const listenToNameChange = (event) => {
-    setItemName(event.currentTarget.value)
+  const [item, setItem] = useState({
+    name: "",
+    description: ""
+  })
+
+  console.log(item);
+
+
+  const listenToChange = (event) => {
+    // debugger
+    // setItemName(event.currentTarget.value)
+
+    setItem({...item, [event.currentTarget.name]: event.currentTarget.value})
   }
 
-  const listenToDescriptionChange = (event) => {
-    setItemDescription(event.currentTarget.value)
-  }
+  // const listenToDescriptionChange = (event) => {
+  //   setItemDescription(event.currentTarget.value)
+  // }
 
   const clearForm = () => {
-    setItemName("")
-    setItemDescription("")
+    // setItemName("")
+    // setItemDescription("")
+    setItem({
+      name: "",
+      description: ""
+    })
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    
+    console.log("submitting form");
+    const newItem = {name: item.name, description: item.description}
 
-    props.addItem({name: itemName, description: itemDescription})
+    props.addItem(newItem)
     clearForm()
   }
 
@@ -33,9 +51,9 @@ const ItemFormContainer = (props) => {
           <input
             type="text"
             id="itemName"
-            name="itemName"
-            onChange={listenToNameChange}
-            value={itemName}
+            name="name"
+            onChange={listenToChange}
+            value={item.name}
           />
         </label>
 
@@ -44,9 +62,9 @@ const ItemFormContainer = (props) => {
           <input
             type="text"
             id="itemDescription"
-            name="itemDescription"
-            onChange={listenToDescriptionChange}
-            value={itemDescription}
+            name="description"
+            onChange={listenToChange}
+            value={item.description}
           />
         </label>
 

@@ -11,8 +11,12 @@ const App = (props) => {
   ])
 
   const addItem = (formData) => {
-    const newItemsArray = items.concat(formData)
-    setItems(newItemsArray)
+    // debugger
+    
+    // const newItemsArray = items.concat(formData)
+    // setItems(newItemsArray)
+
+    setItems([...items, formData])
   }
 
   return (
@@ -20,6 +24,7 @@ const App = (props) => {
       <div>
         <h1>Let's uh....track some items?</h1>
         <ItemList items={items} />
+        
         <ItemFormContainer addItem={addItem} />
       </div>
     </div>
