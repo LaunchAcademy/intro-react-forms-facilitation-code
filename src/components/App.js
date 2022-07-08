@@ -7,13 +7,16 @@ const App = (props) => {
   const [items, setItems] = useState([
     { name: "popcorn", description: "makes greasy hands" },
     { name: "Chocolate", description: "Don't leave it in the sun" },
-    { name: "Coffee", description: "Essential life fuel" }
+    { name: "Coffee", description: "Essential life fuel" },
   ])
 
   const addItem = (fieldState) => {
-    const newItemArray = items.concat(fieldState)
+    // debugger
+//     const newItemArray = items.concat(fieldState)
+// // debugger
+//     setItems(newItemArray)
 
-    setItems(newItemArray)
+    setItems([...items, fieldState])
   }
 
   return (

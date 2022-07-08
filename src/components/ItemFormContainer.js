@@ -1,9 +1,13 @@
 import React, { useState } from "react"
-import _ from "lodash"
 
 const ItemFormContainer = (props) => {
   const [itemName, setItemName] = useState("")
   const [itemDescription, setItemDescription] = useState("")
+  
+  // const [item, setItem] = useState({
+  //   name: "",
+  //   description: ""
+  // })
 
   const handleClearForm = () => {
     setItemName("")
@@ -11,13 +15,17 @@ const ItemFormContainer = (props) => {
   }
 
   const handleFormSubmit = (event) => {
+    debugger
     event.preventDefault()
-
+    
+    // debugger
+    
     props.addItem({ name: itemName, description: itemDescription })
     handleClearForm()
   }
 
   const listenToNameChange = (event) => {
+    // debugger
     setItemName(event.currentTarget.value)
   }
 

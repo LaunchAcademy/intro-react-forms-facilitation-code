@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node_modules/.bin/webpack-dev-server --host 0.0.0.0 --hot",
+    "dev:client": "node_modules/.bin/webpack-dev-server --host 0.0.0.0 --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
