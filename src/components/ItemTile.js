@@ -1,9 +1,12 @@
 import React from "react"
 
-const ItemTile = (props) => {
+const ItemTile = ({ name, description }) => {
+  // const name = props.itemObject.name
+  // const description = props.itemObject.description
+
   return (
     <li>
-      {props.itemObject.name} : {props.itemObject.description}
+      {name}: {description}
     </li>
   )
 }

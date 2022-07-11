@@ -1,40 +1,72 @@
 import React, { useState } from "react"
+import _ from "lodash"
+
+import ErrorList from "./ErrorList"
 
 const ItemFormContainer = (props) => {
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
-  
-  // const [item, setItem] = useState({
-  //   name: "",
-  //   description: ""
-  // })
+  // const [itemName, setItemName] = useState("")
+  // const [itemDescription, setItemDescription] = useState("")
+
+  const [formFieldsState, setFormFieldsState]= useState({ 
+    itemName: "",
+    itemDescription: ""
+  })
+
+  const [errors, setErrors] = useState({})
 
   const handleClearForm = () => {
-    setItemName("")
-    setItemDescription("")
+    setFormFieldsState({itemName: "", itemDescription: ""})
   }
 
   const handleFormSubmit = (event) => {
-    debugger
     event.preventDefault()
-    
-    // debugger
-    
-    props.addItem({ name: itemName, description: itemDescription })
-    handleClearForm()
+
+    if (validateAllFields() === true){
+      props.addItem({
+        name: formFieldsState.itemName,
+        description: formFieldsState.itemDescription
+      })
+
+      handleClearForm()
+    }
   }
 
-  const listenToNameChange = (event) => {
-    // debugger
-    setItemName(event.currentTarget.value)
+  const validateAllFields = () => {
+    let submitErrors
+    const requiredFields = ["itemName", "itemDescription"]
+
+    requiredFields.forEach(field => {
+      if (formFieldsState[field].trim() === "") {
+        submitErrors = {
+          ...submitErrors,
+          [field]: "is blank"
+        }
+      }
+    })
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
   }
 
-  const listenToDescriptionChange = (event) => {
-    setItemDescription(event.currentTarget.value)
+  const listenToFieldChange = (event) => {
+    setFormFieldsState({ 
+      ...formFieldsState,
+      [event.currentTarget.name]: event.currentTarget.value, 
+    })
   }
+
+  // const listenToNameChange = (event) => {
+  //   setItemName(event.currentTarget.value)
+  // }
+
+  // const listenToDescriptionChange = (event) => {
+  //   setItemDescription(event.currentTarget.value)
+  // }
 
   return (
     <div>
+
+      <ErrorList errors={errors} />
+
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="itemName">
           Name:
@@ -42,8 +74,8 @@ const ItemFormContainer = (props) => {
             type="text"
             id="itemName"
             name="itemName"
-            onChange={listenToNameChange}
-            value={itemName}
+            onChange={listenToFieldChange}
+            value={formFieldsState.itemName}
           />
         </label>
 
@@ -53,15 +85,17 @@ const ItemFormContainer = (props) => {
             type="text"
             id="itemDescription"
             name="itemDescription"
-            onChange={listenToDescriptionChange}
-            value={itemDescription}
+            onChange={listenToFieldChange}
+            value={formFieldsState.itemDescription}
           />
         </label>
 
         <input type="submit" value="Submit Item" />
       </form>
 
-      <button onClick={handleClearForm}> Clear Form Button </button>
+      <button className="button" onClick={handleClearForm}> 
+        Clear Form Button 
+      </button>
     </div>
   )
 }
