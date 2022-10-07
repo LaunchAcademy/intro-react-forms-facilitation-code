@@ -10,14 +10,10 @@ const App = (props) => {
     {itemName: "Coffee", itemDescription: "Essential life fuel"},
   ])
 
+
   const addItem = (fieldState) => {
-    // debugger
     // adds item to state
     // is passed down to the form
-    console.log(fieldState);
-    const updatedItems = items.concat(fieldState)
-
-    setItems(updatedItems)
   }
 
   return (
