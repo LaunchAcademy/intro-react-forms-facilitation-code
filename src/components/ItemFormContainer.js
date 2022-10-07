@@ -1,27 +1,34 @@
 import React, { useState } from "react"
 
 const ItemFormContainer = (props) => {
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
 
-  const handleNameChange = (event) => {
-    // set the name input value into state
-    // debugger
-    setName(event.currentTarget.value)
-  }
+  // const [name, setName] = useState("")
+  // const [description, setDescription] = useState("")
+  const [formFieldValues, setFormFieldValues] = useState({
+    itemName: "",
+    itemDescription: ""
+  })
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.currentTarget.value)
+
+  const handleInputChange = (event) => {
+
+    setFormFieldValues({
+      ...formFieldValues,
+      [event.currentTarget.name]: event.currentTarget.value, 
+    })
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const formData = {
-      itemName: name,
-      itemDescription: description
-    }
-    // debugger
-    props.addItem(formData)
+
+    props.addItem(formFieldValues)
+  }
+
+  const handleClearForm = () => {
+    setFormFieldValues({
+      itemName: "",
+      itemDescription: ""
+    })
   }
 
   return (
@@ -32,8 +39,8 @@ const ItemFormContainer = (props) => {
             type="text"
             id="itemName"
             name="itemName"
-            onChange={handleNameChange}
-            value={name}
+            onChange={handleInputChange}
+            value={formFieldValues.itemName}
           />
         </label>
 
@@ -42,13 +49,17 @@ const ItemFormContainer = (props) => {
             type="text"
             id="itemDescription"
             name="itemDescription"
-            value={description}
-            onChange={handleDescriptionChange}
+            onChange={handleInputChange}
+            value={formFieldValues.itemDescription}
           />
         </label>
 
         <input type="submit" value="Submit Item" />
       </form>
+
+      <button onClick={handleClearForm}>
+        Clear Form
+      </button>
     </div>
   )
 }

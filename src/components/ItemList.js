@@ -3,11 +3,14 @@ import ItemTile from "./ItemTile"
 
 const ItemList = (props) => {
 
+
   const listItems = props.items.map((itemObject) => {
     return(
       <ItemTile
         key={itemObject.itemName}
-        itemObject={itemObject}
+        // itemName={itemObject.itemName}
+        // itemDescription={itemObject.itemDescription}
+        {...itemObject}
       />
   )})
 
