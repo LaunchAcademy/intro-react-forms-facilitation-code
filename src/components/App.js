@@ -10,11 +10,11 @@ const App = (props) => {
     {itemName: "Coffee", itemDescription: "Essential life fuel"},
   ])
 
-
   const addItem = (fieldState) => {
-    // adds item to state
-    // is passed down to the form
+    // setItems(items.concat(fieldState))
+    setItems([...items, fieldState])
   }
+
 
   return (
     <div>
@@ -27,6 +27,7 @@ const App = (props) => {
         <ItemFormContainer 
           addItem={addItem}
         />
+
       </div>
     </div>
   )
