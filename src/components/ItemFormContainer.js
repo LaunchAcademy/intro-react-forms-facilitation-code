@@ -2,15 +2,29 @@ import React, { useState } from "react"
 
 const ItemFormContainer = (props) => {
 
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  // const [itemName, setItemName] = useState("")
+  // const [itemDescription, setItemDescription] = useState("")
+  const [newItem, setNewItem] = useState({
+    itemName: "",
+    itemDescription: ""
+  })
 
-  const listenToItemName = (eventObject) => {
-    setItemName(eventObject.currentTarget.value)
-  }
-
-  const listenToItemDescription = (event) => {
-    setItemDescription(event.currentTarget.value)
+  // const listenToItemName = (eventObject) => {
+  //   setItemName(eventObject.currentTarget.value)
+  // }
+  // const listenToItemDescription = (event) => {
+  //   setItemDescription(event.currentTarget.value)
+  // }
+// debugger
+  const listenToInputChange = (event) => {
+    // which input field did the user interact with?
+    // what did the user type?
+    const newStateObject = {
+      ...newItem,
+      [event.currentTarget.name]: event.currentTarget.value
+    }
+    // debugger
+    setNewItem(newStateObject)
   }
 
   const clearForm = () => {
@@ -21,10 +35,10 @@ const ItemFormContainer = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    const newItem = {
-      itemName: itemName,
-      itemDescription: itemDescription
-    }
+    // const newItem = {
+    //   itemName: itemName,
+    //   itemDescription: itemDescription
+    // }
 
     props.addItem(newItem)   
   }
@@ -37,8 +51,8 @@ const ItemFormContainer = (props) => {
             type="text"
             id="itemName"
             name="itemName"
-            onChange={listenToItemName}
-            value={itemName}
+            onChange={listenToInputChange}
+            value={newItem.itemName}
           />
         </label>
 
@@ -47,8 +61,8 @@ const ItemFormContainer = (props) => {
             type="text"
             id="itemDescription"
             name="itemDescription"
-            onChange={listenToItemDescription}
-            value={itemDescription}
+            onChange={listenToInputChange}
+            value={newItem.itemDescription}
           />
         </label>
 

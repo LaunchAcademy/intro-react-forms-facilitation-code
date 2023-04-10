@@ -12,9 +12,15 @@ const App = (props) => {
   ])
 
   const addItem = (newItemObject) => {
-    const newItems = items.concat(newItemObject)
+    // const newItems = items.concat(newItemObject)
+    const newItems = [...items, newItemObject]
+  
+    // debugger
+    
     setItems(newItems)
-  } 
+  }
+
+  // debugger
 
   return (
     <div>
