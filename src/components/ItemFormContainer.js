@@ -3,36 +3,58 @@ import React, { useState } from "react"
 const ItemFormContainer = (props) => {
 
   // listen/log what the user types as they type
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  // const [itemName, setItemName] = useState("")
+  // const [itemDescription, setItemDescription] = useState("")
+  const [newItem, setNewItem] = useState({
+    itemName: "",
+    itemDescription: "",
+  })
+  console.log(newItem);
 
-  console.log("Item Name:", itemName)
-  console.log("Item Description:", itemDescription)
+  // console.log("Item Name:", itemName)
+  // console.log("Item Description:", itemDescription)
 
-  const handleNameChange = (event) => {
-    // get the value of the input field
-    setItemName(event.currentTarget.value)
-  }
+  // const handleNameChange = (event) => {
+  //   // get the value of the input field
+  //   // console.log(event.currentTarget);
+  //   // debugger
+  //   setItemName(event.currentTarget.value)
+  // }
 
-  const handleDescriptionChange = (event) => {
-    // get the value of the input field
-    setItemDescription(event.currentTarget.value)
+  // const handleDescriptionChange = (event) => {
+  //   // get the value of the input field
+  //   setItemDescription(event.currentTarget.value)
+  // }
+
+  const handleChange = (event) => {
+    console.log(event.currentTarget);
+    // debugger
+    setNewItem({
+      ...newItem, 
+      [event.currentTarget.name]: event.currentTarget.value
+    })
   }
 
   const clearForm = () => {
-    setItemName("")
-    setItemDescription("")
+    console.log("clearing the form!");
+    // setItemName("")
+    // setItemDescription("")
+    setNewItem({
+      itemName: "",
+      itemDescription: "",
+    })
   }
 
   const onFormSubmit = (event) => {
     event.preventDefault()
 
-    const newFormData = { 
-      itemName: itemName,
-      itemDescription: itemDescription
-    }
+    // const newFormData = { 
+    //   itemName: itemName,
+    //   itemDescription: itemDescription
+    // }
 
-    props.addItem(newFormData)
+    props.addItem(newItem)
+    clearForm()
   }
 
 
@@ -44,8 +66,8 @@ const ItemFormContainer = (props) => {
             type="text"
             id="itemName"
             name="itemName"
-            onChange={handleNameChange}
-            value={itemName}
+            onChange={handleChange}
+            value={newItem.itemName}
           />
         </label>
 
@@ -54,17 +76,17 @@ const ItemFormContainer = (props) => {
             type="text"
             id="itemDescription"
             name="itemDescription"
-            onChange={handleDescriptionChange}
-            value={itemDescription}
+            onChange={handleChange}
+            value={newItem.itemDescription}
           />
         </label>
 
         <input type="submit" value="Submit Item" />
       </form>
-
-      <button onClick={clearForm}>
+      <button onClick={clearForm} type="button">
         Clear the Form
       </button>
+
     </div>
   )
 }

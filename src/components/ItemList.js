@@ -8,6 +8,7 @@ const ItemList = (props) => {
       <ItemTile
         key={itemObject.itemName}
         itemObject={itemObject}
+        // {...itemObject}
       />
   )})
 

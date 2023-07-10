@@ -12,9 +12,10 @@ const App = (props) => {
 
 
   const addItem = (newItemObject) => {
-    const newArrayWithNewObject = items.concat(newItemObject)
-    setItems(newArrayWithNewObject)
-    // setItems([...items, newItemObject])
+    console.log(newItemObject);
+    // const newArrayWithNewObject = items.concat(newItemObject)
+    // setItems(newArrayWithNewObject)
+    setItems([...items, newItemObject])
   }
 
   return (
