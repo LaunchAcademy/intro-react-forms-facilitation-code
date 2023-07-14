@@ -2,27 +2,49 @@ import React, { useState } from "react"
 import _ from "lodash"
 
 const ItemFormContainer = (props) => {
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  // const [itemName, setItemName] = useState("")
+  // const [itemDescription, setItemDescription] = useState("")
+  const [newItem, setNewItem] = useState({
+    name: "",
+    description: ""
+  })
+
+  console.log(newItem);
 
   const handleClearForm = () => {
-    setItemName("")
-    setItemDescription("")
+    // setItemName("")
+    // setItemDescription("")
+    setNewItem({
+      name: "",
+      description: ""
+    })
   }
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
-
-    props.addItem({ name: itemName, description: itemDescription })
+    // const newItem = { name: itemName, description: itemDescription }
+    // debugger
+    props.addItem(newItem)
+    // props.addItem({ name: itemName, description: itemDescription })
     handleClearForm()
   }
 
-  const listenToNameChange = (event) => {
-    setItemName(event.currentTarget.value)
-  }
+  // const listenToNameChange = (event) => {
+  //   // debugger
+  //   setItemName(event.currentTarget.value)
+  // }
 
-  const listenToDescriptionChange = (event) => {
-    setItemDescription(event.currentTarget.value)
+  // const listenToDescriptionChange = (event) => {
+  //   setItemDescription(event.currentTarget.value)
+  // }
+
+  const handleFieldChange = (event) => {
+    const updatedItem = {
+      ...newItem, 
+      [event.currentTarget.name]: event.currentTarget.value
+    }
+    // debugger
+    setNewItem(updatedItem)
   }
 
   return (
@@ -33,9 +55,9 @@ const ItemFormContainer = (props) => {
           <input
             type="text"
             id="itemName"
-            name="itemName"
-            onChange={listenToNameChange}
-            value={itemName}
+            name="name"
+            onChange={handleFieldChange}
+            value={newItem.name}
           />
         </label>
 
@@ -44,16 +66,16 @@ const ItemFormContainer = (props) => {
           <input
             type="text"
             id="itemDescription"
-            name="itemDescription"
-            onChange={listenToDescriptionChange}
-            value={itemDescription}
+            name="description"
+            onChange={handleFieldChange}
+            value={newItem.description}
           />
         </label>
 
-        <input type="submit" value="Submit Item" />
+        <input className="button" type="submit" value="Submit Item" />
       </form>
 
-      <button onClick={handleClearForm}> Clear Form Button </button>
+      <button className="button" onClick={handleClearForm}> Clear Form Button </button>
     </div>
   )
 }

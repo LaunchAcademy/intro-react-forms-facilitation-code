@@ -11,10 +11,17 @@ const App = (props) => {
   ])
 
   const addItem = (fieldState) => {
-    const newItemArray = items.concat(fieldState)
-
+    debugger
+    // const newItemArray = items.concat(fieldState)
+    const newItemArray = [...items, fieldState]
+    debugger
+    
     setItems(newItemArray)
+    // debugger
+    // ^^ bad, not helpful!
   }
+
+  // debugger
 
   return (
     <div>
