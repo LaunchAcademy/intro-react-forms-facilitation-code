@@ -1,72 +1,69 @@
 import React, { useState } from "react"
 
-const ItemFormContainer = (props) => {
+const ItemForm = (props) => {
 
-  // listen/log what the user types as they type
   const [itemName, setItemName] = useState("")
   const [itemDescription, setItemDescription] = useState("")
 
-  console.log("Item Name:", itemName)
-  console.log("Item Description:", itemDescription)
-
-  const handleNameChange = (event) => {
-    // get the value of the input field
+  const trackUserTypingIntoItemName = (event) => {
     setItemName(event.currentTarget.value)
   }
 
-  const handleDescriptionChange = (event) => {
-    // get the value of the input field
+  const trackUserTypingIntoItemDescription = (event) => {
     setItemDescription(event.currentTarget.value)
   }
 
-  const clearForm = () => {
-    setItemName("")
-    setItemDescription("")
-  }
-
-  const onFormSubmit = (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault()
-
-    const newFormData = { 
+    // organize the data from state 
+    const allFormData = {
       itemName: itemName,
       itemDescription: itemDescription
     }
 
-    props.addItem(newFormData)
+    // debugger
+    props.addFormDataToItems(allFormData)
+
+    resetTheFormState()
   }
 
+  const resetTheFormState = () => {
+    setItemName("")
+    setItemDescription("")
+  }
+  
+  console.log("item name state:", itemName)
+  console.log("item description state:", itemDescription)
 
   return (
     <div>
-      <form onSubmit={onFormSubmit}>
+         <form onSubmit={handleFormSubmit}>
         <label htmlFor="itemName">Name:
           <input
             type="text"
-            id="itemName"
             name="itemName"
-            onChange={handleNameChange}
             value={itemName}
+            onChange={trackUserTypingIntoItemName}
           />
         </label>
 
         <label htmlFor="itemDescription">Description:
           <input
             type="text"
-            id="itemDescription"
             name="itemDescription"
-            onChange={handleDescriptionChange}
             value={itemDescription}
+            onChange={trackUserTypingIntoItemDescription}
           />
         </label>
 
         <input type="submit" value="Submit Item" />
       </form>
 
-      <button onClick={clearForm}>
-        Clear the Form
+      <button onClick={resetTheFormState}>
+        Clear Form
       </button>
     </div>
   )
 }
 
-export default ItemFormContainer
+export default ItemForm

@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 
-import ItemFormContainer from './ItemFormContainer';
+import ItemForm from './ItemForm';
 import ItemList from "./ItemList"
 
 const App = (props) => {
+
   const [items, setItems] = useState([
     {itemName: "popcorn", itemDescription: "makes greasy hands"}, 
     {itemName: "Chocolate", itemDescription: "Don't leave it in the sun"}, 
     {itemName: "Coffee", itemDescription: "Essential life fuel"},
   ])
 
-
-  const addItem = (newItemObject) => {
-    const newArrayWithNewObject = items.concat(newItemObject)
-    setItems(newArrayWithNewObject)
-    // setItems([...items, newItemObject])
+  const addFormDataToItems = (allDataFromForm) => {
+    const clonedItemsPlusNewItem = items.concat(allDataFromForm)
+    setItems(clonedItemsPlusNewItem)
   }
 
   return (
@@ -25,8 +24,8 @@ const App = (props) => {
           items={items}
         />
 
-        <ItemFormContainer 
-          addItem={addItem}
+        <ItemForm 
+          addFormDataToItems={addFormDataToItems}
         />
       </div>
     </div>
