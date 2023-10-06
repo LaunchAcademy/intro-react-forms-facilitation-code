@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import _ from "lodash"
 
 const ItemForm = (props) => {
 
@@ -15,13 +16,11 @@ const ItemForm = (props) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
-    // organize the data from state 
     const allFormData = {
       itemName: itemName,
       itemDescription: itemDescription
     }
 
-    // debugger
     props.addFormDataToItems(allFormData)
 
     resetTheFormState()
@@ -47,7 +46,8 @@ const ItemForm = (props) => {
           />
         </label>
 
-        <label htmlFor="itemDescription">Description:
+        <label htmlFor="itemDescription">
+          Description:
           <input
             type="text"
             name="itemDescription"

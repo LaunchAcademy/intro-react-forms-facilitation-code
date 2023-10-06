@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react"
 
 import ItemForm from './ItemForm';
 import ItemList from "./ItemList"
@@ -32,4 +32,4 @@ const App = (props) => {
   )
 }
 
-export default App;
+export default App
