@@ -3,7 +3,7 @@ import React from "react"
 const ItemTile = (props) => {
   return (
     <li>
-      {props.itemObject.name} : {props.itemObject.description}
+      {props.itemObject.itemName} : {props.itemObject.itemDescription}
     </li>
   )
 }

@@ -3,6 +3,7 @@ import ItemTile from "./ItemTile"
 
 const ItemList = (props) => {
 
+  // debugger
   const listItems = props.items.map((itemObject) => {
     return(
       <ItemTile

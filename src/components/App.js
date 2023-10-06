@@ -1,27 +1,32 @@
 import React, { useState } from "react"
 
-import ItemFormContainer from "./ItemFormContainer"
+import ItemForm from './ItemForm';
 import ItemList from "./ItemList"
 
 const App = (props) => {
+
   const [items, setItems] = useState([
-    { name: "popcorn", description: "makes greasy hands" },
-    { name: "Chocolate", description: "Don't leave it in the sun" },
-    { name: "Coffee", description: "Essential life fuel" }
+    {itemName: "popcorn", itemDescription: "makes greasy hands"}, 
+    {itemName: "Chocolate", itemDescription: "Don't leave it in the sun"}, 
+    {itemName: "Coffee", itemDescription: "Essential life fuel"},
   ])
 
-  const addItem = (fieldState) => {
-    const newItemArray = items.concat(fieldState)
-
-    setItems(newItemArray)
+  const addFormDataToItems = (allDataFromForm) => {
+    const clonedItemsPlusNewItem = items.concat(allDataFromForm)
+    setItems(clonedItemsPlusNewItem)
   }
 
   return (
     <div>
       <div>
-        <h1>Let's uh....track some items?</h1>
-        <ItemList items={items} />
-        <ItemFormContainer addItem={addItem} />
+        <h1>Let's gather some supplies!</h1>
+        <ItemList
+          items={items}
+        />
+
+        <ItemForm 
+          addFormDataToItems={addFormDataToItems}
+        />
       </div>
     </div>
   )
