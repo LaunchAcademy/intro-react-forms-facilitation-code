@@ -12,20 +12,9 @@ const App = (props) => {
   ])
 
   const addFormDataToItems = (allDataFromForm) => {
-    // debugger
-    // !!!!
-
-    // const clonedItemsPlusNewItem = items.concat(allDataFromForm)
-    // setItems(clonedItemsPlusNewItem)
-    
     const clonedItemsPlusNewItem = [...items, allDataFromForm]
     setItems(clonedItemsPlusNewItem)
-
-    // console.log(clonedItemsPlusNewItem)
-    // console.log(clonedItemsPlusNewItem === items)
   }
-  
-  console.log(items)
 
   return (
     <div>
