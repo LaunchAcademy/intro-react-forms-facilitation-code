@@ -1,58 +1,80 @@
 import React, { useState } from "react"
-import _ from "lodash"
 
 const ItemForm = (props) => {
 
-  const [itemName, setItemName] = useState("")
-  const [itemDescription, setItemDescription] = useState("")
+  // const [name, setName] = useState("")
+  // const [description, setDescription] = useState("")
 
-  const trackUserTypingIntoItemName = (event) => {
-    setItemName(event.currentTarget.value)
-  }
+  const [itemObject, setItemObject] = useState({
+    itemName: "",
+    itemDescription: ""
+  })
+  // console.log("item object state", itemObject)
 
-  const trackUserTypingIntoItemDescription = (event) => {
-    setItemDescription(event.currentTarget.value)
+  // const trackUserTypingIntoName = (event) => {
+  //   setName(event.currentTarget.value)
+  // }
+
+  // const trackUserTypingIntoDescription = (event) => {
+  //   setDescription(event.currentTarget.value)
+  // }
+
+  const trackUserTyping = (event) => {
+    // console.log(event)
+    // console.log(event.currentTarget)
+    // console.log(event.currentTarget.name)
+    // console.log(event.currentTarget.value)
+
+    setItemObject({
+      ...itemObject,
+      [event.currentTarget.name]: event.currentTarget.value
+    })
   }
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
-    const allFormData = {
-      itemName: itemName,
-      itemDescription: itemDescription
-    }
+    // const allFormData = {
+    //   itemName: name,
+    //   itemDescription: description
+    // }
 
-    props.addFormDataToItems(allFormData)
+
+    props.addFormDataToItems(itemObject)
 
     resetTheFormState()
   }
 
   const resetTheFormState = () => {
-    setItemName("")
-    setItemDescription("")
+    // setName("")
+    // setDescription("")
+    setItemObject({
+      itemName: "",
+      itemDescription: ""
+    })
   }
   
-  console.log("item name state:", itemName)
-  console.log("item description state:", itemDescription)
+  // console.log("item name state:", name)
+  // console.log("item description state:", description)
 
   return (
     <div>
-         <form onSubmit={handleFormSubmit}>
-        <label htmlFor="itemName">Name:
+        <form onSubmit={handleFormSubmit}>
+        <label htmlFor="name">Name:
           <input
             type="text"
             name="itemName"
-            value={itemName}
-            onChange={trackUserTypingIntoItemName}
+            value={itemObject.itemName}
+            onChange={trackUserTyping}
           />
         </label>
 
-        <label htmlFor="itemDescription">
+        <label htmlFor="description">
           Description:
           <input
             type="text"
             name="itemDescription"
-            value={itemDescription}
-            onChange={trackUserTypingIntoItemDescription}
+            value={itemObject.itemDescription}
+            onChange={trackUserTyping}
           />
         </label>
 

@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React from "react"
+
 import ItemTile from "./ItemTile"
 
 const ItemList = (props) => {
@@ -15,7 +16,9 @@ const ItemList = (props) => {
   return (
     <ul>
       <h3>Items</h3>
-      {listItems}
+      <ul>
+        {listItems}
+      </ul>
     </ul>
   )
 }
